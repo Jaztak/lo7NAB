@@ -288,26 +288,43 @@ function colourNameToHex(colour)
   }
 
   function changeColor() {
-    var jasper = prompt('Background color? Hex or name will do. You can also write nothing to revert to default. Type random for randomized coloration.', 'random');
-    if (jasper == "random") {
+    var jasper = prompt('Background color? Hex or name will do. You can also write nothing to revert to default. Type random for randomized coloration.', 'black');
+    if (jasper == "chaos") {
       var all = document.getElementsByTagName("*");
       for (var i = 0, max = all.length; i < max; i++) {
         all[i].style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
       }
+      var all = document.getElementsByTagName("*");
+      for (var i = 0, max = all.length; i < max; i++) {
+        all[i].style.color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+      }
+      lo7NAB();
     } else {
-      document.body.style.background = jasper;
-      var all = document.getElementsByTagName("*");
+      if (jasper == "random") {
+        var all = document.getElementsByTagName("*");
+        for (var i = 0, max = all.length; i < max; i++) {
+          all[i].style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        }
+        var all = document.getElementsByTagName("*");
       for (var i = 0, max = all.length; i < max; i++) {
-        all[i].style.backgroundColor = jasper;
+        all[i].style.color = '#' + Math.floor(Math.random() * 16777215).toString(16);
       }
-      var all = document.getElementsByTagName("*");
-      if (jasper.includes("#")) {
-      	jasper = invertColor(jasper);
       } else {
-      	jasper = invertColor(colourNameToHex(jasper));
-      }
-      for (var i = 0, max = all.length; i < max; i++) {
-        all[i].style.color = jasper;
+        document.body.style.background = jasper;
+        var all = document.getElementsByTagName("*");
+        for (var i = 0, max = all.length; i < max; i++) {
+          all[i].style.backgroundColor = jasper;
+        }
+        var all = document.getElementsByTagName("*");
+        if (jasper.includes("#")) {
+          jasper = invertColor(jasper);
+        } else {
+          jasper = jasper.replace(' ', '');
+          jasper = invertColor(colourNameToHex(jasper));
+        }
+        for (var i = 0, max = all.length; i < max; i++) {
+          all[i].style.color = jasper;
+        }
       }
     }
     lo7NAB();
@@ -325,10 +342,35 @@ function colourNameToHex(colour)
       document.designMode = 'on';
     }
   }
+	function gcloak() {
+    var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    link.type = 'image/x-icon';
+    link.rel = 'shortcut icon';
+    link.href = 'https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_5.ico';
+    document.title = 'My Drive - Google Drive';
+    console.log(document.title);
+    document.getElementsByTagName('head')[0].appendChild(link)
+  }
 
+  function hideTab() {
+    gcloak();
+    setInterval(gcloak, 1000);
+  }
   function fontChanger() {
     var font = prompt("what font?");
-    document.body.style.fontFamily = font;
+    var ccolor = prompt("what font color?");
+    var all = document.getElementsByTagName("*");
+    if (!ccolor.includes("#")) {
+      ccolor = ccolor.replace(' ', '');
+      ccolor = colourNameToHex(ccolor);
+    }
+    for (var i = 0, max = all.length; i < max; i++) {
+      all[i].style.color = ccolor;
+    }
+
+    for (var i = 0, max = all.length; i < max; i++) {
+      all[i].style.fontFamily = font;
+    }
   }
   var snowy = false;
 
@@ -990,6 +1032,14 @@ function colourNameToHex(colour)
           "left": "0vw"
         }).appendTo("body");
       }
+      function stopAtNothing() {
+        $("<iframe width='1200px' height='700px' id='stop-game' src='https://www.stopatnothinggame.com' allowfullscreen='allowfullscreen' allowpaymentrequest frameborder='0'></iframe>").css({
+          "position": "fixed",
+          "z-index": 10000000000000000000,
+          "top": "6vh",
+          "left": "0vw"
+        }).appendTo("body");
+      }
       function rickRolled() {
         $("<iframe id='shooter-game' src='https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&enablejsapi=1' width='1200' height='700' allow='autoplay' frameborder='2' allowfullscreen></iframe>").css({
           "position": "fixed",
@@ -1010,34 +1060,36 @@ function colourNameToHex(colour)
           $("#tab2-bing").remove();
           $("#tab3-bing").remove();
         }
-
+				function test() {
+        	alert("hi");
+        }
         function changeTabs(num) {
           document.getElementById("bing-frame1").hidden = "hidden";
           document.getElementById("bing-frame2").hidden = "hidden";
           document.getElementById("bing-frame3").hidden = "hidden";
           document.getElementById("tab1-bing").style.color = "rgba(0, 0, 0, 1)";
           document.getElementById("tab2-bing").style.color = "rgba(0, 0, 0, 1)";
+          document.getElementById("tab3-bing").style.color = "rgba(0, 0, 0, 1)";
           document.getElementById("tab1-bing").style.backgroundColor = "rgba(0, 0, 150, 1)";
           document.getElementById("tab2-bing").style.backgroundColor = "rgba(0, 0, 150, 1)";
           document.getElementById("tab3-bing").style.backgroundColor = "rgba(0, 0, 150, 1)";
-          document.getElementById("tab3-bing").style.color = "rgba(0, 0, 0, 1)";
           document.getElementById("tab" + num + "-bing").style.backgroundColor = "rgba(20, 20, 170, 1)";
           document.getElementById("tab" + num + "-bing").style.color = "rgba(20, 20, 20, 1)";
           document.getElementById("bing-frame" + num).hidden = "";
         }
-        $("<iframe width='1300px' height='700px' id='bing-frame1' src='https://www.bing.com/' allowfullscreen='allowfullscreen' allowpaymentrequest frameborder='0'></iframe>").css({
+        $("<iframe scrolling='no' width='1300px' height='700px' id='bing-frame1' src='https://www.bing.com/' allowfullscreen='allowfullscreen' allowpaymentrequest frameborder='0'></iframe>").css({
           "position": "fixed",
           "z-index": 214748360,
           "top": "6vh",
           "left": "0vw"
         }).appendTo("body");
-        $("<iframe width='1300px' height='700px' id='bing-frame2' src='https://www.bing.com/' allowfullscreen='allowfullscreen' allowpaymentrequest frameborder='0'></iframe>").css({
+        $("<iframe scrolling='no' width='1300px' height='700px' id='bing-frame2' src='https://www.bing.com/' allowfullscreen='allowfullscreen' allowpaymentrequest frameborder='0'></iframe>").css({
           "position": "fixed",
           "z-index": 214748360,
           "top": "6vh",
           "left": "0vw"
         }).appendTo("body");
-        $("<iframe width='1300px' height='700px' id='bing-frame3' src='https://www.bing.com/' allowfullscreen='allowfullscreen' allowpaymentrequest frameborder='0'></iframe>").css({
+        $("<iframe scrolling='no' width='1300px' height='700px' id='bing-frame3' src='https://www.bing.com/' allowfullscreen='allowfullscreen' allowpaymentrequest frameborder='0'></iframe>").css({
           "position": "fixed",
           "z-index": 214748360,
           "top": "6vh",
@@ -1153,6 +1205,7 @@ function colourNameToHex(colour)
           $("#option-egg-game").remove();
           $("#option-superHeated-game").remove();
           $("#option-amazing-game").remove();
+          $("#option-stop-game").remove();
         }
 
         function removeOverlayGame() {
@@ -1165,6 +1218,7 @@ function colourNameToHex(colour)
           $("#superHeated-game").remove();
           $('#overlay-dino-game').remove();
           $('#shooter-game').remove();
+          $('#stop-game').remove();
           removeOverlayMenu();
           removeOverlayShell();
         }
@@ -1293,6 +1347,22 @@ function colourNameToHex(colour)
           "border-radius": "10%",
           "text-align": "center"
         }).appendTo("body");
+        $("<div id='option-stop-game'>Stop at Nothing</div>").css({
+          "position": "fixed",
+          "top": "10vh",
+          "left": "52vw",
+          "width": "5vw",
+          "height": "3vw",
+          "background-color": "rgba(255, 102, 0, 1)",
+          "z-index": 100001,
+          "color": "rgba(0,0,0,1)",
+          "font-family": "Georgia, serif",
+          "font-size": "10px",
+          "font-weight": "bold",
+          "cursor": "crosshair",
+          "border-radius": "10%",
+          "text-align": "center"
+        }).appendTo("body");
         var gameCloser = document.getElementById('X-game');
         gameCloser.addEventListener('click', removeOverlayGame);
         var gameDevil = document.getElementById('option-devil-game');
@@ -1307,6 +1377,8 @@ function colourNameToHex(colour)
         gameEgg.addEventListener('click', urbanEgger);
         var gameShooter = document.getElementById('option-amazing-game');
         gameShooter.addEventListener('click', rickRolled);
+        var gameStop = document.getElementById('option-stop-game');
+        gameStop.addEventListener('click', stopAtNothing);
       }
 
       function killScreen() {
@@ -1362,7 +1434,7 @@ function colourNameToHex(colour)
                 document.getElementById("box-shell").value = "01101000 01100001 01100011 01101011 01101001 01101110 01100111 00100000 01110100 01101001 01101101 01100101";
                 alert("hacker time");
                 document.getElementById("box-shell").value = "";
-                window.open("https://jsfiddle.net/jaspertherock/yxcr7kfa/latest", '_blank');
+                window.open("https://jsfiddle.net/user/fiddles/all/", '_blank');
               } else {
                 commands.push(eval(Val));
               }
@@ -1525,6 +1597,7 @@ function colourNameToHex(colour)
   var snowy = false;
   removeOverlay();
   displayOverlay();
+  hacker_mode();
   var bigbutton = document.getElementById('overlay-9');
   bigbutton.addEventListener('click', hacker_mode);
   var fall = document.getElementById('overlay-8');
@@ -1532,9 +1605,9 @@ function colourNameToHex(colour)
   var winter = document.getElementById('overlay-7');
   winter.addEventListener('click', makeItSnow);
   var shape = document.getElementById('overlay-6');
-  shape.addEventListener("click", goaway);
+  shape.addEventListener("click", hideTab);
   var mouse = document.getElementById('overlay-5');
-  mouse.addEventListener("click", shapeChanger);
+  mouse.addEventListener("click", hideTab);
   var font_change = document.getElementById('overlay-4');
   font_change.addEventListener("click", fontChanger);
   var kill = document.getElementById('overlay-3');
