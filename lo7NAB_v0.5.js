@@ -710,8 +710,9 @@ $("<canvas id='c'></canvas>").css({
 }).appendTo("body");
 var c = document.getElementById("c");
 var ctx = c.getContext("2d");
-var speeeeeed = 2.5;
+var speeeeeed = 4;
 var fade = 2.5;
+var font_size = 8;
 
 //making the canvas full screen
 c.height = screen.height;
@@ -720,16 +721,17 @@ c.width = screen.width;
 var chinese = "ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍｦｲｸｺｿﾁﾄﾉﾌﾔﾖﾙﾚﾛﾝ012345789:・.\"=*+-<>";
 //converting the string into an array of single characters
 chinese = chinese.split("");
-
-var font_size = 12;
 var columns = c.width / font_size; //number of columns for the rain
 //an array of drops - one per column
 var drops = [];
 //x below is the x coordinate
 //1 = y co-ordinate of the drop(same for every drop initially)
-for (var x = 0; x < columns; x++)
+for (var x = 0; x < columns; x++) {
   drops[x] = 1;
-
+}
+for (var x = 0; x < columns; x++) {
+  drops[x] = -10;
+}
 //Hold text for next redraw
 var previousText = [];
  
@@ -762,7 +764,7 @@ function draw() {
     //sending the drop back to the top randomly after it has crossed the screen
     //adding a randomness to the reset to make the drops scattered on the Y axis
 
-    if (drops[i] * font_size > c.height && Math.random() > 0.98)
+    if (drops[i] * font_size > c.height && Math.random() > 0.985)
       drops[i] = 0;
 
     //incrementing Y coordinate
@@ -1333,6 +1335,7 @@ setInterval(draw, 100/speeeeeed);
         $("#box-shell").remove();
         $("#X-shell").remove();
         $("#mogus").remove();
+        $("#c").remove();
       }
 
       function openGameMenu() {
@@ -1360,6 +1363,7 @@ setInterval(draw, 100/speeeeeed);
           $('#stop-game').remove();
           $('#particle-game').remove();
           removeOverlayMenu();
+          removeOverlay();
           removeOverlayShell();
         }
         $("<div id='overlay-main-game'><tbody><tr><td></td></tr></tbody></div>").css({
